@@ -11,12 +11,15 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Other module inherits                                      -->
+  <!-- GWT Platform -->
+  <inherits name='com.gwtplatform.dispatch.Dispatch' />
+  <inherits name='com.gwtplatform.mvp.Mvp' />
+  
+  <!-- EXT-GWT --> 
+  <inherits name="com.extjs.gxt.ui.GXT"/>
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.pharma.is.client.Soft'/>
-  
-  <inherits name='com.gwtplatform.dispatch.Dispatch' />
-  <inherits name='com.gwtplatform.mvp.Mvp' />
   
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
@@ -25,5 +28,9 @@
   <define-configuration-property name="gin.ginjector" is-multi-valued="false" />
   <set-configuration-property name="gin.ginjector" 
       value="com.pharma.is.client.gin.MyGinjector" />
+
+  <stylesheet src="js/ext/resources/css/ext-all.css"/>
+  <script src="js/ext/adapter/ext/ext-base.js"/>
+  <script src="js/ext/ext-all.js"/>
 
 </module>
