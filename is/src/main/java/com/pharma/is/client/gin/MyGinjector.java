@@ -10,16 +10,20 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.pharma.is.client.ui.MainPagePresenter;
 
-@GinModules({DispatchAsyncModule.class, MyModule.class})
+
+/**
+ * TODO: Add comments for MyGinjector
+ *
+ */
+@GinModules({ DispatchAsyncModule.class, MyModule.class })
 public interface MyGinjector extends Ginjector {
 
-	EventBus getEventBus();
+    EventBus getEventBus();
 
-	Provider<MainPagePresenter> getMainPagePresenter();
+    Provider<MainPagePresenter> getMainPagePresenter();
 
-	PlaceManager getPlaceManager();
+    PlaceManager getPlaceManager();
 
-	ProxyFailureHandler getProxyFailureHandler();
+    ProxyFailureHandler getProxyFailureHandler();
 
-	//AsyncProvider<MainPagePresenter> getResponsePresenter();
 }

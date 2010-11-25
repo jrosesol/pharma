@@ -5,7 +5,9 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
+
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
