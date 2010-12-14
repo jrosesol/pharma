@@ -1,5 +1,7 @@
 package com.pharma.is.client.ui;
 
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -11,62 +13,63 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class MainPageView extends ViewImpl implements MainPagePresenter.MyView {
+    private final Button showTop1;
+    private final Button showTop2;
+    private final Button showBottom1;
+    private final Button showBottom2;
+    private final Label message;
 
-	private static String html = "<h1>Web Application Starter Project</h1>\n"
-			+ "<table align=\"center\">\n"
-			+ "  <tr>\n"
-			+ "    <td colspan=\"2\" style=\"font-weight:bold;\">Please enter your name:</td>\n"
-			+ "  </tr>\n"
-			+ "  <tr>\n"
-			+ "    <td id=\"nameFieldContainer\"></td>\n"
-			+ "    <td id=\"sendButtonContainer\"></td>\n"
-			+ "  </tr>\n"
-			+ "  <tr>\n"
-			+ "    <td colspan=\"2\" style=\"color:red;\" id=\"errorLabelContainer\"></td>\n"
-			+ "  </tr>\n" + "</table>\n";
+    @Inject
+    public MainPageView() {
+        showTop1 = new Button("Show top view 1");
+        showTop2 = new Button("Show top view 2");
+        showBottom1 = new Button("Show bottom view 1");
+        showBottom2 = new Button("Show bottom view 2");
+        message = new Label();
 
-	HTMLPanel panel = new HTMLPanel(html);
+        RootPanel.get("showViewTop1").add(showTop1);
+        RootPanel.get("showViewTop2").add(showTop2);
+        RootPanel.get("showViewBottom1").add(showBottom1);
+        RootPanel.get("showViewBottom2").add(showBottom2);
+    }
 
-	private final Label errorLabel;
-	private final TextBox nameField;
-	private final Button sendButton;
+    public Widget asWidget() {
+        return RootPanel.get();
+    }
 
-	@Inject
-	public MainPageView() {
-		sendButton = new Button("Send");
-		nameField = new TextBox();
-		nameField.setText("GWT User");
-		errorLabel = new Label();
+    public Button getSendButton() {
+        return showTop1;
+    }
 
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
+    public void resetAndFocus() {
+    }
 
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		panel.add(nameField, "nameFieldContainer");
-		panel.add(sendButton, "sendButtonContainer");
-		panel.add(errorLabel, "errorLabelContainer");
-	}
+    public void setError(String errorText) {
+        message.setText(errorText);
+    }
 
-	public Widget asWidget() {
-		return panel;
-	}
+    @Override
+    public String getName() {
+        return message.getText();
+    }
 
-	public String getName() {
-		return nameField.getText();
-	}
+    @Override
+    public HasClickHandlers getTopView1Handler() {
+        return showTop1;
+    }
 
-	public Button getSendButton() {
-		return sendButton;
-	}
+    @Override
+    public HasClickHandlers getTopView2Handler() {
+        return showTop2;
+    }
 
-	public void resetAndFocus() {
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
-	}
+    @Override
+    public HasClickHandlers getBottomView1Handler() {
+        return showBottom1;
+    }
 
-	public void setError(String errorText) {
-		errorLabel.setText(errorText);
-	}
+    @Override
+    public HasClickHandlers getBottomView2Handler() {
+        return showBottom2;
+    }
 }

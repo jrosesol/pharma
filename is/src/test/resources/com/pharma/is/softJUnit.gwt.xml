@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <!-- Inherit our applications main module.                      -->
-  <inherits name='com.pharma.is.is'/>
+  <!-- <inherits name='com.pharma.is.client.Soft'/> -->
+
 
   <!-- Specify the path to any remote services.                   -->
-  <servlet path="/soft/greet" class="com.pharma.is.server.GreetingServiceImpl" />
+  <!--<servlet path="/soft/greet" class="com.pharma.is.server.GreetingServiceImpl" />-->
 
 </module>

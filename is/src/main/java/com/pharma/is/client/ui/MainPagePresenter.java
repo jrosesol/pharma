@@ -2,6 +2,8 @@ package com.pharma.is.client.ui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.inject.Inject;
@@ -17,6 +19,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 //import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.pharma.is.client.mvp.TopPresenter;
 import com.pharma.is.shared.FieldVerifier;
 import com.pharma.is.shared.action.GenericAction;
 import com.pharma.is.shared.action.SendTextToServer;
@@ -39,6 +42,11 @@ public class MainPagePresenter extends
         String getName();
 
         Button getSendButton();
+        
+        HasClickHandlers getTopView1Handler();
+        HasClickHandlers getTopView2Handler();
+        HasClickHandlers getBottomView1Handler();
+        HasClickHandlers getBottomView2Handler();
 
         void resetAndFocus();
 
@@ -46,14 +54,6 @@ public class MainPagePresenter extends
     }
 
     public static final String nameToken = "main";
-
-    private static final String INVALID_ACTION = null;
-
-    private static final String ACTION_VIEW = "view";
-
-    private static final String ACTION_EDIT = "edit";
-
-    private static final String ACTION_NEW = "new";
 
     @SuppressWarnings("unused")
     private final PlaceManager placeManager;
@@ -71,58 +71,41 @@ public class MainPagePresenter extends
     @Override
     protected void onBind() {
         super.onBind();
-        registerHandler(getView().getSendButton().addClickHandler(
+        
+        registerHandler(getView().getTopView1Handler().addClickHandler(
                 new ClickHandler() {
-
-                    public void onClick(ClickEvent arg0) {
-                        sendNameToServer();
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        placeManager.revealPlace((new PlaceRequest(TopPresenter.nameToken)).with("number", "1"));
                     }
-
                 }));
+        
+        registerHandler(getView().getTopView2Handler().addClickHandler(
+                new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        placeManager.revealPlace((new PlaceRequest(TopPresenter.nameToken)).with("number", "2"));
+                    }
+                }));
+
+//        registerHandler(getView().getSendButton().addClickHandler(
+//                new ClickHandler() {
+//
+//                    public void onClick(ClickEvent arg0) {
+//                        sendNameToServer();
+//                    }
+//
+//                }));
     }
 
     @Override
     protected void onReset() {
         super.onReset();
-        getView().resetAndFocus();
     }
 
     @Override
     protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
-    
-    @Override
-    public void prepareFromRequest(PlaceRequest placeRequest) {
-      super.prepareFromRequest(placeRequest);
-
-      String action = new String();
-
-      // In the next call, "view" is the default value,
-      // returned if "action" is not found on the URL.
-      String actionString = placeRequest.getParameter("action", "view");
-      action = INVALID_ACTION;
-      if( actionString.equals("view") )
-        action = ACTION_VIEW;
-      else if( actionString.equals("edit") )
-        action = ACTION_EDIT;
-      else if( actionString.equals("new") )
-        action = ACTION_NEW;
-
-//      try {
-//        id = Long.valueOf( placeRequest.getParameter("id", null) );
-//      } catch( NumberFormatException e ) {
-//        id = INVALID_ID;
-//      }
-
-      if( action == INVALID_ACTION ) {
-        placeManager.revealErrorPlace( placeRequest.getNameToken() );
-        return;
-      }
-      else {
-          getView().setError(actionString);
-      }
-
+        //RevealRootContentEvent.fire(this, this);
     }
 
     /**

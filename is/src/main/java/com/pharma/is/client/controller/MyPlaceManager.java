@@ -9,14 +9,13 @@ import com.pharma.is.client.ui.MainPagePresenter;
 
 public class MyPlaceManager extends PlaceManagerImpl {
 
-	  @Inject
-	  public MyPlaceManager(EventBus eventBus, TokenFormatter tokenFormatter) {
-	    super(eventBus, tokenFormatter);
-	  }
+    @Inject
+    public MyPlaceManager(EventBus eventBus, TokenFormatter tokenFormatter) {
+        super(eventBus, tokenFormatter);
+    }
 
-	  public void revealDefaultPlace() {
-	    revealPlace(new PlaceRequest(MainPagePresenter.nameToken));
-	  }
+    public void revealDefaultPlace() {
+        revealPlace(new PlaceRequest(MainPagePresenter.nameToken));
+    }
 
-	}
-
+}
