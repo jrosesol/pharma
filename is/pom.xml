@@ -154,7 +154,7 @@
     <repository>
       <id>gwtp</id>
       <name>gwt-platform</name>
-      <url>https://maven.gwt-platform.googlecode.com/hg/</url>
+      <url>http://maven.gwt-platform.googlecode.com/hg/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
