@@ -1,21 +1,32 @@
 package com.pharma.is.client.gin;
 
-import com.google.gwt.event.shared.EventBus;
+//import com.google.gwt.inject.client.AsyncProvider;
+import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
-import com.google.gwt.place.shared.PlaceController;
-import com.pharma.is.client.mvp.view.AppStartPageView;
+import com.google.inject.Provider;
+import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
+import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
+import com.pharma.is.client.mvp.TopPresenter;
+import com.pharma.is.client.ui.MainPagePresenter;
+
 
 /**
  * TODO: Add comments for MyGinjector
  *
  */
-@GinModules({ MyModule.class })
+@GinModules({ DispatchAsyncModule.class, MyModule.class })
 public interface MyGinjector extends Ginjector {
 
     EventBus getEventBus();
 
-    PlaceController getPlaceController();
+    Provider<MainPagePresenter> getMainPagePresenter();
 
-    AppStartPageView getAppStartPageView();
+    PlaceManager getPlaceManager();
+
+    ProxyFailureHandler getProxyFailureHandler();
+
+    AsyncProvider<TopPresenter> getTopPresenter();
 }
