@@ -8,9 +8,8 @@ import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
-import com.pharma.is.client.mvp.TopPresenter;
 import com.pharma.is.client.mvp.presenter.AppStartPagePresenter;
-import com.pharma.is.client.ui.MainPagePresenter;
+import com.pharma.is.client.mvp.presenter.TopPresenter;
 
 
 /**
@@ -23,7 +22,6 @@ public interface MyGinjector extends Ginjector {
     EventBus getEventBus();
 
     Provider<AppStartPagePresenter> getAppStartPagePresenter();
-    Provider<MainPagePresenter> getMainPagePresenter();
 
     PlaceManager getPlaceManager();
 

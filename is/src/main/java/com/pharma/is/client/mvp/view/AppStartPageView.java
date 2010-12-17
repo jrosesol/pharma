@@ -23,7 +23,6 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.pharma.is.client.mvp.TopView;
 import com.pharma.is.client.mvp.presenter.AppStartPagePresenter.AppStartPageViewInterface;
 
 

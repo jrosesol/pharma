@@ -11,12 +11,10 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 import com.pharma.is.client.controller.MyPlaceManager;
-import com.pharma.is.client.mvp.TopPresenter;
-import com.pharma.is.client.mvp.TopView;
 import com.pharma.is.client.mvp.presenter.AppStartPagePresenter;
+import com.pharma.is.client.mvp.presenter.TopPresenter;
 import com.pharma.is.client.mvp.view.AppStartPageView;
-import com.pharma.is.client.ui.MainPagePresenter;
-import com.pharma.is.client.ui.MainPageView;
+import com.pharma.is.client.mvp.view.TopView;
 
 public class MyModule extends AbstractPresenterModule {
 
@@ -31,9 +29,6 @@ public class MyModule extends AbstractPresenterModule {
                 .in(Singleton.class);
 
         // Presenters
-        bindPresenter(MainPagePresenter.class, MainPagePresenter.MyView.class,
-                MainPageView.class, MainPagePresenter.MyProxy.class);
-
         bindPresenter(AppStartPagePresenter.class, AppStartPagePresenter.AppStartPageViewInterface.class,
                 AppStartPageView.class, AppStartPagePresenter.AppStartPageProxy.class);
 
