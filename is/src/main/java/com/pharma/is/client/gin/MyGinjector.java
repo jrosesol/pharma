@@ -1,6 +1,5 @@
 package com.pharma.is.client.gin;
 
-//import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
@@ -10,6 +9,7 @@ import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.pharma.is.client.mvp.TopPresenter;
+import com.pharma.is.client.mvp.presenter.AppStartPagePresenter;
 import com.pharma.is.client.ui.MainPagePresenter;
 
 
@@ -22,6 +22,7 @@ public interface MyGinjector extends Ginjector {
 
     EventBus getEventBus();
 
+    Provider<AppStartPagePresenter> getAppStartPagePresenter();
     Provider<MainPagePresenter> getMainPagePresenter();
 
     PlaceManager getPlaceManager();

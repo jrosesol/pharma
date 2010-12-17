@@ -5,7 +5,8 @@ import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
-import com.pharma.is.client.ui.MainPagePresenter;
+import com.pharma.is.client.mvp.presenter.AppStartPagePresenter;
+
 
 public class MyPlaceManager extends PlaceManagerImpl {
 
@@ -15,7 +16,7 @@ public class MyPlaceManager extends PlaceManagerImpl {
     }
 
     public void revealDefaultPlace() {
-        revealPlace(new PlaceRequest(MainPagePresenter.nameToken));
+        revealPlace(new PlaceRequest(AppStartPagePresenter.nameToken));
     }
 
 }

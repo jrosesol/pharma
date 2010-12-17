@@ -1,32 +1,24 @@
 package com.pharma.is.client.ui;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.shared.HasHandlers;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
+
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.client.DispatchAsync;
 import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 //import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
-import com.pharma.is.client.mvp.TopPresenter;
-import com.pharma.is.shared.FieldVerifier;
-import com.pharma.is.shared.action.GenericAction;
-import com.pharma.is.shared.action.SendTextToServer;
-import com.pharma.is.shared.action.SendTextToServerResult;
 
 public class MainPagePresenter extends
-        Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy> {
+        Presenter<MainPagePresenter.MyView, MainPagePresenter.MyProxy>
+        implements MainPageUiHandlers {
+    
     /**
      * {@link MainPagePresenter}'s proxy.
      */
@@ -38,19 +30,9 @@ public class MainPagePresenter extends
     /**
      * {@link MainPagePresenter}'s view.
      */
-    public interface MyView extends View {
-        String getName();
-
-        Button getSendButton();
-        
-        HasClickHandlers getTopView1Handler();
-        HasClickHandlers getTopView2Handler();
-        HasClickHandlers getBottomView1Handler();
-        HasClickHandlers getBottomView2Handler();
-
-        void resetAndFocus();
-
-        void setError(String errorText);
+    public interface MyView extends View, HasUiHandlers<MainPageUiHandlers> {
+        // HasClickHandlers getTopView1Handler();
+        // HasClickHandlers getTopView2Handler();
     }
 
     public static final String nameToken = "main";
@@ -58,6 +40,7 @@ public class MainPagePresenter extends
     @SuppressWarnings("unused")
     private final PlaceManager placeManager;
 
+    @SuppressWarnings("unused")
     private DispatchAsync dispatcher;
 
     @Inject
@@ -66,36 +49,22 @@ public class MainPagePresenter extends
         super(eventBus, view, proxy);
         this.placeManager = placeManager;
         this.dispatcher = dispatcher;
+
+        getView().setUiHandlers(this);
     }
 
     @Override
     protected void onBind() {
         super.onBind();
-        
-        registerHandler(getView().getTopView1Handler().addClickHandler(
-                new ClickHandler() {
-                    @Override
-                    public void onClick(ClickEvent event) {
-                        placeManager.revealPlace((new PlaceRequest(TopPresenter.nameToken)).with("number", "1"));
-                    }
-                }));
-        
-        registerHandler(getView().getTopView2Handler().addClickHandler(
-                new ClickHandler() {
-                    @Override
-                    public void onClick(ClickEvent event) {
-                        placeManager.revealPlace((new PlaceRequest(TopPresenter.nameToken)).with("number", "2"));
-                    }
-                }));
 
-//        registerHandler(getView().getSendButton().addClickHandler(
-//                new ClickHandler() {
-//
-//                    public void onClick(ClickEvent arg0) {
-//                        sendNameToServer();
-//                    }
-//
-//                }));
+        // registerHandler(getView().getTopView1Handler().addClickHandler(
+        // new ClickHandler() {
+        // @Override
+        // public void onClick(ClickEvent event) {
+        // placeManager.revealPlace((new
+        // PlaceRequest(TopPresenter.nameToken)).with("number", "1"));
+        // }
+        // }));
     }
 
     @Override
@@ -105,30 +74,31 @@ public class MainPagePresenter extends
 
     @Override
     protected void revealInParent() {
-        //RevealRootContentEvent.fire(this, this);
+        RevealRootContentEvent.fire(this, this);
     }
 
     /**
      * Send the name from the nameField to the server and wait for a response.
      */
+    @SuppressWarnings("unused")
     private void sendNameToServer() {
-        // First, we validate the input.
-        getView().setError("");
-        String textToServer = getView().getName();
-        if (!FieldVerifier.isValidName(textToServer)) {
-            getView().setError("Please enter at least four characters");
-            return;
-        }
-
+        // // First, we validate the input.
+        // getView().setError("");
+        // String textToServer = getView().getName();
+        // if (!FieldVerifier.isValidName(textToServer)) {
+        // getView().setError("Please enter at least four characters");
+        // return;
+        // }
         //
-        GenericAction genAction = new GenericAction();
-        try {
-            genAction.defaultExecution(dispatcher);
-            getView().setError("Worked!");
-        } catch (Exception e) {
-            e.printStackTrace();
-            getView().setError("Fuck!");
-        }
+        // //
+        // GenericAction genAction = new GenericAction();
+        // try {
+        // genAction.defaultExecution(dispatcher);
+        // getView().setError("Worked!");
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // getView().setError("Fuck!");
+        // }
 
         // dispatcher.execute(new SendTextToServer("Test send."),
         // new AsyncCallback<SendTextToServerResult>() {
@@ -150,6 +120,12 @@ public class MainPagePresenter extends
         // placeManager.revealPlace(new
         // PlaceRequest(ResponsePresenter.nameToken)
         // .with(ResponsePresenter.textToServerParam, textToServer));
+    }
+
+    @Override
+    public void Test() {
+        // TODO Auto-generated method stub
+        
     }
 
 }
