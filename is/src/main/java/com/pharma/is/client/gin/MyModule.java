@@ -13,9 +13,11 @@ import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 import com.pharma.is.client.controller.MyPlaceManager;
 import com.pharma.is.client.mvp.presenter.AppStartPagePresenter;
 import com.pharma.is.client.mvp.presenter.ToolbarPresenter;
-import com.pharma.is.client.mvp.presenter.ToolbarPresenter.ToolbarView;
+import com.pharma.is.client.mvp.presenter.ToolbarPresenter.ToolbarViewInterface;
 import com.pharma.is.client.mvp.presenter.TopPresenter;
+import com.pharma.is.client.mvp.presenter.TopPresenter.TopViewInterface;
 import com.pharma.is.client.mvp.view.AppStartPageView;
+import com.pharma.is.client.mvp.view.ToolbarView;
 import com.pharma.is.client.mvp.view.TopView;
 
 public class MyModule extends AbstractPresenterModule {
@@ -31,12 +33,17 @@ public class MyModule extends AbstractPresenterModule {
                 .in(Singleton.class);
 
         // Presenters
-        bindPresenter(AppStartPagePresenter.class, AppStartPagePresenter.AppStartPageViewInterface.class,
-                AppStartPageView.class, AppStartPagePresenter.AppStartPageProxy.class);
+        bindPresenter(AppStartPagePresenter.class,
+                AppStartPagePresenter.AppStartPageViewInterface.class,
+                AppStartPageView.class,
+                AppStartPagePresenter.AppStartPageProxy.class);
 
-        bindPresenter(TopPresenter.class, TopPresenter.TopView.class, TopView.class, TopPresenter.TopProxy.class);
-        
-        bindPresenter(ToolbarPresenter.class, ToolbarPresenter.ToolbarView.class, ToolbarView.class, ToolbarPresenter.ToolbarProxy.class);
+        bindPresenter(TopPresenter.class, TopPresenter.TopViewInterface.class,
+                TopView.class, TopPresenter.TopProxy.class);
+
+        bindPresenter(ToolbarPresenter.class,
+                ToolbarPresenter.ToolbarViewInterface.class, ToolbarView.class,
+                ToolbarPresenter.ToolbarProxy.class);
 
         // bindPresenter(ResponsePresenter.class,
         // ResponsePresenter.MyView.class,

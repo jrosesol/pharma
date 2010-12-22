@@ -36,7 +36,7 @@ import com.pharma.is.client.mvp.presenter.TopPresenter;
  * 
  *
  */
-public class TopView extends ViewImpl implements TopPresenter.TopView{
+public class TopView extends ViewImpl implements TopPresenter.TopViewInterface {
 
     ///////////////////////////////////////////////////////////////////////////
     // Members
