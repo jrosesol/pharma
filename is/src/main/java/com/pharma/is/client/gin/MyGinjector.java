@@ -9,6 +9,7 @@ import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.pharma.is.client.mvp.presenter.AppStartPagePresenter;
+import com.pharma.is.client.mvp.presenter.ToolbarPresenter;
 import com.pharma.is.client.mvp.presenter.TopPresenter;
 
 
@@ -28,4 +29,7 @@ public interface MyGinjector extends Ginjector {
     ProxyFailureHandler getProxyFailureHandler();
 
     AsyncProvider<TopPresenter> getTopPresenter();
+    
+    AsyncProvider<ToolbarPresenter> getToolbarPresenter();
+    
 }

@@ -218,6 +218,8 @@ public class ${name}Presenter extends&#13;
 }</template><template autoinsert="true" context="java" deleted="false" description="" enabled="true" name="view">import com.google.gwt.user.client.ui.VerticalPanel;&#13;
 import com.google.gwt.user.client.ui.Widget;&#13;
 import com.gwtplatform.mvp.client.ViewImpl;&#13;
+import com.google.inject.Inject;&#13;
+import com.pharma.is.client.mvp.presenter.*;&#13;
 &#13;
 &#13;
 /**&#13;
