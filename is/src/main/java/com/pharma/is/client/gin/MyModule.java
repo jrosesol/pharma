@@ -13,18 +13,28 @@ import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 import com.pharma.is.client.controller.MyPlaceManager;
 import com.pharma.is.client.mvp.presenter.AppStartPagePresenter;
 import com.pharma.is.client.mvp.presenter.ToolbarPresenter;
-import com.pharma.is.client.mvp.presenter.ToolbarPresenter.ToolbarViewInterface;
 import com.pharma.is.client.mvp.presenter.TopPresenter;
-import com.pharma.is.client.mvp.presenter.TopPresenter.TopViewInterface;
 import com.pharma.is.client.mvp.view.AppStartPageView;
 import com.pharma.is.client.mvp.view.ToolbarView;
 import com.pharma.is.client.mvp.view.TopView;
+import com.pharma.is.client.ui.CommandDigester;
+import com.pharma.is.client.ui.CommandHandlerPresenter;
+import com.pharma.is.client.ui.CommandHandlerView;
+import com.pharma.is.client.ui.CommandHistory;
+import com.pharma.is.client.ui.CommandLineBoxPresenter;
+import com.pharma.is.client.ui.CommandLineBoxView;
+import com.pharma.is.client.ui.PatientRequiredInfoPresenterWidget;
+import com.pharma.is.client.ui.PatientRequiredInfoView;
+import com.pharma.is.client.ui.PatientSinglePrescriptionPresenterWidget;
+import com.pharma.is.client.ui.PatientSinglePrescriptionView;
 
 public class MyModule extends AbstractPresenterModule {
 
     @Override
     protected void configure() {
         bind(EventBus.class).to(DefaultEventBus.class).in(Singleton.class);
+        bind(CommandDigester.class).in(Singleton.class);
+        bind(CommandHistory.class).to(CommandDigester.class);
         bind(PlaceManager.class).to(MyPlaceManager.class).in(Singleton.class);
         bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(
                 Singleton.class);
@@ -44,7 +54,22 @@ public class MyModule extends AbstractPresenterModule {
         bindPresenter(ToolbarPresenter.class,
                 ToolbarPresenter.ToolbarViewInterface.class, ToolbarView.class,
                 ToolbarPresenter.ToolbarProxy.class);
+        
+        bindPresenter(CommandLineBoxPresenter.class,
+                CommandLineBoxPresenter.CommandLineBoxViewInterface.class, CommandLineBoxView.class,
+                CommandLineBoxPresenter.CommandLineBoxProxy.class);
+        
+        bindSingletonPresenterWidget(CommandHandlerPresenter.class,
+                CommandHandlerPresenter.CommandHandlerViewInterface.class, CommandHandlerView.class);
 
+        bindSingletonPresenterWidget(PatientRequiredInfoPresenterWidget.class,
+                PatientRequiredInfoPresenterWidget.PatientRequiredInfoViewInterface.class, PatientRequiredInfoView.class);
+        
+        bindSingletonPresenterWidget(
+                PatientSinglePrescriptionPresenterWidget.class,
+                PatientSinglePrescriptionPresenterWidget.PatientSinglePrescriptionViewInterface.class,
+                PatientSinglePrescriptionView.class);
+        
         // bindPresenter(ResponsePresenter.class,
         // ResponsePresenter.MyView.class,
         // ResponseView.class, ResponsePresenter.MyProxy.class);

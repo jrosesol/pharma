@@ -24,7 +24,9 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 import com.pharma.is.client.mvp.view.AppStartPageUiHandlers;
+import com.pharma.is.client.ui.CommandLineBoxPresenter;
 
 /**
  * AppStartPage Presenter implementation
@@ -78,11 +80,14 @@ public class AppStartPagePresenter extends
     // Constructors
     ///////////////////////////////////////////////////////////////////////////
     @Inject
-    public AppStartPagePresenter(EventBus eventBus, AppStartPageViewInterface view, AppStartPageProxy proxy,
-            PlaceManager placeManager, DispatchAsync dispatcher) {
+    public AppStartPagePresenter(final EventBus eventBus,
+            final AppStartPageViewInterface view,
+            final AppStartPageProxy proxy, final PlaceManager placeManager,
+            final DispatchAsync dispatcher,
+            final CommandLineBoxPresenter commandLine) {
         super(eventBus, view, proxy);
         getView().setUiHandlers(this);
-        
+
         this.placeManager = placeManager;
     }
 
@@ -95,7 +100,7 @@ public class AppStartPagePresenter extends
     ///////////////////////////////////////////////////////////////////////////
     @Override
     protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
+        RevealRootLayoutContentEvent.fire(this, this);
     }
 
     @Override

@@ -11,6 +11,8 @@ import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.pharma.is.client.mvp.presenter.AppStartPagePresenter;
 import com.pharma.is.client.mvp.presenter.ToolbarPresenter;
 import com.pharma.is.client.mvp.presenter.TopPresenter;
+import com.pharma.is.client.ui.CommandDigester;
+import com.pharma.is.client.ui.CommandLineBoxPresenter;
 
 
 /**
@@ -21,8 +23,12 @@ import com.pharma.is.client.mvp.presenter.TopPresenter;
 public interface MyGinjector extends Ginjector {
 
     EventBus getEventBus();
+    
+    CommandDigester getCommandDigester();
 
     Provider<AppStartPagePresenter> getAppStartPagePresenter();
+    
+    Provider<CommandLineBoxPresenter> getCommandLineBoxPresenter();
 
     PlaceManager getPlaceManager();
 
