@@ -33,8 +33,8 @@ public class MyModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
         bind(EventBus.class).to(DefaultEventBus.class).in(Singleton.class);
-        bind(CommandDigester.class).in(Singleton.class);
-        bind(CommandHistory.class).to(CommandDigester.class);
+        bind(CommandDigester.class).asEagerSingleton();//in(Singleton.class);
+        //bind(CommandHistory.class).to(CommandDigester.class);
         bind(PlaceManager.class).to(MyPlaceManager.class).in(Singleton.class);
         bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(
                 Singleton.class);
